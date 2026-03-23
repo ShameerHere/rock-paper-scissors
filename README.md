@@ -1,1 +1,2 @@
-# rock-paper-scissors
+Rock paper scissors played in the console using
+javascript
