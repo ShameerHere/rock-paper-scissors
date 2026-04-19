@@ -10,107 +10,68 @@ function getComputerChoice(){
 }
 
 
-function getHumanChoice(){
-   let answer=prompt("rock,paper or scissors?")
-   return answer.toLowerCase()
-}
-
-function playGame(){   
  let humanScore=0
  let computerScore=0
- playRound(getHumanChoice(), getComputerChoice())
- playRound(getHumanChoice(), getComputerChoice())
- playRound(getHumanChoice(), getComputerChoice())
- playRound(getHumanChoice(), getComputerChoice())
- playRound(getHumanChoice(), getComputerChoice())
 
-if (computerScore>humanScore){
-    console.log("Computer Wins the Game!")
-    } else if (humanScore>computerScore){
-        console.log("You Win the Game!")
-    }else console.log ("Looks Like a Tie")
+
+const final=document.querySelector(".final")
+const results=document.querySelector(".results")
+
  function playRound(humanChoice,computerChoice){
+    computerChoice=getComputerChoice()
      if(humanChoice==="rock" && computerChoice==="paper"){
-        return computerScore++, console.log("You lose! Paper beats Rock")
+        return computerScore++, results.textContent=`You lose! Paper beats Rock Score - You: ${humanScore} | Computer: ${computerScore}`, scoreCard()
     } else if(humanChoice==="scissors" && computerChoice==="rock"){
-        return computerScore++,console.log("You lose! Rock beats Scissors")
+        return computerScore++,results.textContent=`You lose! Rock beats Scissors- You: ${humanScore} | Computer: ${computerScore}`, scoreCard()
     } else if(humanChoice==="paper" && computerChoice==="scissors"){
-        return computerScore++,console.log("You lose! scissors beats paper")
+        return computerScore++,results.textContent=`You lose! scissors beats paper- You: ${humanScore} | Computer: ${computerScore}`, scoreCard()
     } else if(humanChoice==="paper" && computerChoice==="rock"){
-        return humanScore++,console.log("You win! Paper beats Rock")
+        return humanScore++,results.textContent=`You win! Paper beats Rock-- You: ${humanScore} | Computer: ${computerScore}`, scoreCard()
     } else if(humanChoice==="rock" && computerChoice==="scissors"){
-        return humanScore++,console.log("You win! Rock beats scissors")
+        return humanScore++,results.textContent=`You win! Rock beats scissors- You: ${humanScore} | Computer: ${computerScore}`, scoreCard()
     } else if(humanChoice==="scissors" && computerChoice==="paper"){
-        return humanScore++,console.log("You win! Scissors beats Paper")}
-     else return console.log("Draw!");
+        return humanScore++,results.textContent=`You win! Scissors beats Paper- You: ${humanScore} | Computer: ${computerScore}`, scoreCard()}
+     else return results.textContent=`Draw! - You: ${humanScore} | Computer: ${computerScore}`, scoreCard();
     }
-   
 
-} 
 
-playGame()
+const btns=document.querySelectorAll("button");
 
-/*
+btns.forEach(btn=>btn.addEventListener("click", (event)=>{
+    let target=event.target;
 
-Just pasting my pseudocode here because i did it in another doc:
+    switch (target.id) {
+        case "rock":
+            playRound(target.id);
+            break;
+        case "paper":
+            playRound(target.id);
+            break;
+        case "scissors":
+            playRound(target.id);
+            break;
+    }
+}));
 
-2: A value from one of “rock”, “paper” or “scissors” is selected
+function scoreCard(){
+      if (computerScore===5){
+    final.textContent="Computer Wins the Game!"
+    } else if (humanScore===5){
+        final.textContent="You Win the Game!"
+    }
+}
 
-rock and paper and scissors-create 3 variables
 
-Then-create a function which chooses between them randomly
+//Let the player choose an option through 3 different buttons
+//Each button calls back to the playRound function
+//when the rock button is pressed the value of humanChoice is Rock
+//when the paper button is pressed the value of humanChoice is Paper
+//when the scissors button is pressed the value of humanChoice is scissors
+//Display the results through a div
+//Display the running score
+//Once someone reaches 5 points announce a winner
 
-0-0.33333
 
-3:
 
-Allow the user to input one of the three options
 
-prompt
 
-5:
-
-Take the human and computer players choices:
-
-humanChoice is the answer in response to the function getHumanChoice
-
-computerChoice is the result of the function getComputerChoice
-
-allow humanChoice to be case-insensitive
-
-so convert whatever the players said to lowercase
-
-convert answer to lowercase
-
-Play a round
-
-make rock beat scissors, scissors beat paper, paper beat rock,
-
-if same make it a draw
-
-Increase the winner’s score
-
-Announce a winner
-
-```jsx
-   return "You lose! Paper beats Rock"
-    
-    return "You lose! Rock beats Scissors"
-    
-    return "You lose! Scissors beats Paper"
-
-    return "You win! Paper beats Rock"
-    
-    return "You win! Rock beats Scissors"
-    
-    return "You win! Scissors beats Paper"
-    
-```
-
-Playing rock paper scissors-check
-
-playing it 5 times-break it down what if i just wanted to play it twice-check
-
-keeping track of the score-
-
-when someone gets 5 declare a winner*/
